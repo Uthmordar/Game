@@ -1,0 +1,19 @@
+{
+  "name": "tanguy/test_carbonit",
+  "licence": "MIT",
+  "authors": [
+    {
+      "name": "Uthmordar",
+      "email": "tanguyrygodin@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^2.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "TGodin\\CarbonIT\\": "src/TGodin/CarbonIT/",
+      "Psr\\Log\\": "src/Psr/Log/"
+    }
+  }
+}
