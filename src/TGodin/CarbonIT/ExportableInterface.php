@@ -11,5 +11,5 @@ interface ExportableInterface {
   /**
    * @return []
    */
-  public function export();
+  public function export(): array;
 }

@@ -8,91 +8,91 @@ class ConsoleLogger implements VerboseLoggerInterface {
 
   protected $verbose;
 
-  public function __construct($verbose = false) {
+  public function __construct(bool $verbose = false): void {
 
-    $this->verbose = (bool) $verbose;
+    $this->verbose = $verbose;
   }
 
-  public function setVerbosity($verbose) {
+  public function setVerbosity(bool $verbose): self {
 
-    $this->verbose = (bool) $verbose;
+    $this->verbose = $verbose;
     return $this;
   }
 
-  public function getVerbosity() {
+  public function getVerbosity(): bool {
 
     return $this->verbose;
   }
 
-  public function emergency($message, array $context = []) {
+  public function emergency(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL, '[0;31m');
   }
 
-  public function alert($message, array $context = []) {
+  public function alert(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL, '[0;31m');
   }
 
-  public function critical($message, array $context = []) {
+  public function critical(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL, '[0;31m');
   }
 
-  public function error($message, array $context = []) {
+  public function error(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL, '[0;31m');
   }
 
-  public function warning($message, array $context = []) {
+  public function warning(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL, '[0;33m');
   }
 
-  public function verboseWarning($message, array $context = []) {
+  public function verboseWarning(string $message, array $context = []): void {
 
     if ($this->verbose) {
       $this->warning($message, $context);
     }
   }
 
-  public function notice($message, array $context = []) {
+  public function notice(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL);
   }
 
-  public function info($message, array $context = []) {
+  public function info(string $message, array $context = []): void {
 
     $this->output($message . PHP_EOL, '[0;32m');
   }
 
-  public function verboseInfo($message, array $context = []) {
+  public function verboseInfo(string $message, array $context = []): void {
 
     if ($this->verbose) {
       $this->info($message, $context);
     }
   }
 
-  public function debug($message, array $context = []) {
+  public function debug(string $message, array $context = []): void {
     
     $this->output($message . PHP_EOL, '[0;35m');
   }
 
-  public function log($level, $message, array $context = []) {
+  public function log(string $level, string $message, array $context = []): void {
 
     if (method_exists($this, $level)) {
       call_user_func([$this, $level], $message, $context);
     }
   }
 
-  public function verboseLog($level, $message, array $context = []) {
+  public function verboseLog(string $level, string $message, array $context = []): void {
 
     if ($this->verbose) {
       $this->log($level, $message, $context);
     }
   }
 
-  protected function output($message, $marker = '[0;37m') {
+  protected function output(string $message, string $marker = '[0;37m'): void {
 
     print chr(27) . $marker . $message . chr(27) . '[0m';
   }

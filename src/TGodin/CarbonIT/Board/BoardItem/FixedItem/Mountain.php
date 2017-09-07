@@ -11,7 +11,7 @@ use TGodin\CarbonIT\Board\BoardItem\BoardItem;
  */
 class Mountain extends BoardItem  {
 
-  public function export() {
+  public function export(): array {
 
     return ['type' => 'M', 'X' => $this->posX, 'Y' => $this->posY];
   }

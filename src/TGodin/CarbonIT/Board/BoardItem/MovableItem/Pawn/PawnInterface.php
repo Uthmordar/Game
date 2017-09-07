@@ -11,5 +11,5 @@ use TGodin\CarbonIT\Board\BoardItem\BoardItemPickableInterface;
  */
 interface PawnInterface extends BoardItemPickableInterface, MovableItemInterface {
 
-  public function getName();
+  public function getName(): string;
 }

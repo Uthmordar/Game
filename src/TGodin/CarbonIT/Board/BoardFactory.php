@@ -5,7 +5,6 @@ namespace TGodin\CarbonIT\Board;
 use TGodin\CarbonIT\Board\BoardItem\FixedItem\Mountain;
 use TGodin\CarbonIT\Board\BoardItem\FixedItem\Treasure;
 use TGodin\CarbonIT\Board\BoardItem\MovableItem\Pawn\Pawn;
-use TGodin\CarbonIT\Board\BoardItem\MovableItem\Pawn\PawnInterface;
 
 /**
  * Description of BoardFactory
@@ -18,19 +17,20 @@ class BoardFactory implements BoardFactoryInterface {
    * @param int $width
    * @param int $height
    *
-   * @return BoardInterface
+   * @return Board
    */
-  public function board($width, $height) {
+  public function board(int $width, int $height): Board {
 
     return new Board($width, $height);
   }
 
   /**
-   * @param type $x
-   * @param type $y
+   * @param int $x
+   * @param int $y
+   *
    * @return Mountain
    */
-  public function mountain($x, $y) {
+  public function mountain(int $x, int $y): Mountain {
     
     return new Mountain($x, $y);
   }
@@ -41,9 +41,9 @@ class BoardFactory implements BoardFactoryInterface {
    * @param string $orientation
    * @param string $name
    *
-   * @return PawnInterface
+   * @return Pawn
    */
-  public function pawn($x, $y, $orientation, $name) {
+  public function pawn(int $x, int $y, string $orientation, string $name): Pawn {
 
     return new Pawn($x, $y, $orientation, $name);
   }
@@ -55,7 +55,7 @@ class BoardFactory implements BoardFactoryInterface {
    *
    * @return Treasure
    */
-  public function treasure($x, $y, $count) {
+  public function treasure(int $x, int $y, int $count): Treasure {
 
     return new Treasure($x, $y, $count);
   }

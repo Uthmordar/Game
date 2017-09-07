@@ -18,7 +18,7 @@ class Treasure extends BoardItem implements BoardItemPickableInterface {
 
   protected $accessibility = true;
 
-  public function __construct($x, $y, $artifactsCount) {
+  public function __construct($x, $y, $artifactsCount): void {
 
     parent::__construct($x, $y);
     if (!is_numeric($artifactsCount) && $artifactsCount <1) {
@@ -30,7 +30,7 @@ class Treasure extends BoardItem implements BoardItemPickableInterface {
   /**
    * @inherit
    */
-  public function export() {
+  public function export(): array {
 
     return ['type' => 'T', 'X' => $this->posX, 'Y' => $this->posY, 'pickables' => $this->pickables];
   }

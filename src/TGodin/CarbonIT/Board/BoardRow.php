@@ -17,7 +17,7 @@ class BoardRow {
    */
   protected $cells;
 
-  public function __construct($nbCells) {
+  public function __construct(int $nbCells): void {
 
     $this->cellsCount = $nbCells;
     $this->cells = [];
@@ -33,14 +33,14 @@ class BoardRow {
    *
    * @return Boolean
    */
-  public function indexExist($index) {
+  public function indexExist(int $index): bool {
 
-    return isset($this->cells[(int) $index]);
+    return isset($this->cells[$index]);
   }
 
-  public function isCellAccessible($index) {
+  public function isCellAccessible(int $index): bool {
 
-    return isset($this->cells[(int) $index]) && $this->cells[(int) $index]->isAccessible();
+    return isset($this->cells[$index]) && $this->cells[$index]->isAccessible();
   }
 
   /**
@@ -50,9 +50,9 @@ class BoardRow {
    *
    * @return BoardCell | null
    */
-  public function get($index) {
+  public function get(int $index): BoardCell {
 
-    return ($this->indexExist((int) $index)) ? $this->cells[(int) $index] : null;
+    return ($this->indexExist($index)) ? $this->cells[$index] : null;
   }
 
   /**
@@ -63,11 +63,11 @@ class BoardRow {
    *
    * @return boolean
    */
-  public function set($index, BoardItem $value) {
+  public function set(int $index, BoardItem $value): bool {
 
-    $cell = $this->cells[(int) $index];
+    $cell = $this->cells[$index];
     if ((int) $index <= $this->cellsCount -1 && ($cell == null || $cell->isAccessible())) {
-      return $this->cells[(int) $index]->addItem($value);
+      return $this->cells[$index]->addItem($value);
     }
     return false;
   }
@@ -79,7 +79,7 @@ class BoardRow {
    *
    * @return $this
    */
-  public function delete(BoardItem $item, $index) {
+  public function delete(int $index, BoardItem $item): bool {
 
     if ($this->indexExist($index)) {
       $this->cells[$index]->removeItem($item);

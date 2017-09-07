@@ -2,6 +2,7 @@
 
 namespace TGodin\CarbonIT\Board;
 
+use TGodin\CarbonIT\ExportableInterface;
 use TGodin\CarbonIT\Board\BoardItem\BoardItem;
 
 /**
@@ -9,7 +10,7 @@ use TGodin\CarbonIT\Board\BoardItem\BoardItem;
  *
  * @author godinta
  */
-interface BoardInterface {
+interface BoardInterface extends ExportableInterface {
 
   /**
    * Get cell at provided coordinate.
@@ -19,17 +20,17 @@ interface BoardInterface {
    *
    * @return BoardCellInterface | null
    */
-  public function getCell($posX, $posY);
+  public function getCell(int $posX, int $posY): BoardCellInterface;
 
   /**
    * @return int
    */
-  public function getHeight();
+  public function getHeight(): int;
 
   /**
    * @return int
    */
-  public function getWidth();
+  public function getWidth(): int;
 
   /**
    * Check if cell at provided coordinate is accessible.
@@ -37,7 +38,7 @@ interface BoardInterface {
    * @param int $posX
    * @param int $posY
    */
-  public function isCellAccessible($posX, $posY);
+  public function isCellAccessible(int $posX, int $posY): bool;
 
   /**
    * Add a BoardItem in Board.
@@ -50,7 +51,7 @@ interface BoardInterface {
    *
    * @throws GameConfigException
    */
-  public function putItem(BoardItem $item, $posX, $posY);
+  public function putItem(BoardItem $item, int $posX, int $posY): bool;
 
   /**
    * Remove item from targeted cell.
@@ -64,10 +65,6 @@ interface BoardInterface {
    *
    * @return $this
    */
-  public function removeItem(BoardItem $item, $x, $y);
+  public function removeItem(BoardItem $item, int $x, int $y): BoardInterface;
 
-  /**
-   * @return []
-   */
-  public function export();
 }

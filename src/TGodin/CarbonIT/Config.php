@@ -21,7 +21,7 @@ class Config {
    * @param LoggerInterface $log
    * @param string $path
    */
-  public function __construct(LoggerInterface $log, $path) {
+  public function __construct(LoggerInterface $log, string $path): void {
 
     $this->log = $log;
     $this->path = $path;
@@ -30,7 +30,7 @@ class Config {
   /**
    * Load data.
    */
-  public function load() {
+  public function load(): void {
 
     if (!file_exists($this->path)) {
       $this->log->error('Provided configuration file did not exist, empty dataset will be used.');
@@ -48,7 +48,7 @@ class Config {
    *
    * @return string[]
    */
-  public function getConfig() {
+  public function getConfig(): array {
 
     return $this->data;
   }

@@ -19,12 +19,12 @@ class BoardCell implements BoardCellInterface {
   protected $content;
   protected $blocked = false;
 
-  public function __construct() {
+  public function __construct(): void {
 
     $this->content = new SplObjectStorage();
   }
 
-  public function addItem(BoardItem $item) {
+  public function addItem(BoardItem $item): bool {
 
     if (!$this->blocked || $item->getAccessibility()) {
 
@@ -37,16 +37,16 @@ class BoardCell implements BoardCellInterface {
     return false;
   }
 
-  public function isAccessible() {
+  public function isAccessible(): bool {
     return !$this->blocked;
   }
 
-  public function getItems() {
+  public function getItems(): SplObjectStorage {
 
     return $this->content; 
   }
 
-  public function removeItem(BoardItem $item) {
+  public function removeItem(BoardItem $item): self {
 
     $this->content->detach($item);
     if (!$item->getAccessibility()) {

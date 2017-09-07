@@ -18,7 +18,7 @@ class MovableItem extends BoardItem implements MovableItemInterface {
   protected $allowedPositions = [ItemOrientation::N, ItemOrientation::W, ItemOrientation::S, ItemOrientation::E];
   protected $nbPositions;
 
-  public function __construct($posX, $posY, $orientation) {
+  public function __construct(int $posX, int $posY, string $orientation): void {
 
     parent::__construct($posX, $posY);
     if (!in_array($orientation, $this->allowedPositions)) {
@@ -34,7 +34,7 @@ class MovableItem extends BoardItem implements MovableItemInterface {
    *
    * @return string
    */
-  public function getOrientation() {
+  public function getOrientation(): string {
 
     return $this->allowedPositions[$this->orientation];
   }
@@ -48,7 +48,7 @@ class MovableItem extends BoardItem implements MovableItemInterface {
    *
    * @throws GameConfigException
    */
-  public function setOrientation($orientation) {
+  public function setOrientation(string $orientation): self {
 
     if (!in_array($orientation, $this->allowedPositions)) {
       throw new GameConfigException('Invalid item orientation ' . $orientation . ' should be in ' . implode(', ', $this->allowedPositions) . '.');
@@ -62,7 +62,7 @@ class MovableItem extends BoardItem implements MovableItemInterface {
    *
    * @return $this
    */
-  public function rotateLeft() {
+  public function rotateLeft(): self {
 
     if ($this->orientation == $this->nbPositions - 1) {
       $this->orientation = 0;
@@ -77,7 +77,7 @@ class MovableItem extends BoardItem implements MovableItemInterface {
    *
    * @return $this
    */
-  public function rotateRight() {
+  public function rotateRight(): self {
 
     if ($this->orientation == 0) {
       $this->orientation = $this->nbPositions - 1;
@@ -95,10 +95,10 @@ class MovableItem extends BoardItem implements MovableItemInterface {
    *
    * @return $this
    */
-  public function setMove($x, $y) {
+  public function setMove(int $x, int $y): self {
 
-    $this->posX = (int) $x;
-    $this->posY = (int) $y;
+    $this->posX = $x;
+    $this->posY = $y;
     $this->history = [$this->posX, $this->posY];
     return $this;
   }

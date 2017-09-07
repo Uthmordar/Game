@@ -9,7 +9,15 @@ namespace TGodin\CarbonIT\Support;
  */
 final class String {
 
-  public static function str_split_unicode($str, $l = 0) {
+  /**
+   * Split string into array respecting unicode.
+   *
+   * @param string $str
+   * @param int $l
+   *
+   * @return string[]
+   */
+  public static function str_split_unicode(string $str, int $l = 0): array {
     if ($l > 0) {
       $ret = array();
       $len = mb_strlen($str, "UTF-8");

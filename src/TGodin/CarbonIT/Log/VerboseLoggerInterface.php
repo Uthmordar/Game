@@ -6,13 +6,13 @@ use Psr\Log\LoggerInterface;
 
 interface VerboseLoggerInterface extends LoggerInterface {
 
-  public function setVerbosity($verbose);
+  public function setVerbosity(bool $verbose): LoggerInterface;
 
-  public function getVerbosity();
+  public function getVerbosity(): bool;
 
-  public function verboseInfo($message, array $context = []);
+  public function verboseInfo(string $message, array $context = []): void;
 
-  public function verboseWarning($message, array $context = []);
+  public function verboseWarning(string $message, array $context = []): void;
 
-  public function verboseLog($level, $message, array $context = []);
+  public function verboseLog(string $level, string $message, array $context = []): void;
 }

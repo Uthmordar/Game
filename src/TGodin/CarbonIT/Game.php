@@ -56,7 +56,7 @@ class Game {
    * @param BoardFactoryInterface $factory
    * @param string[] $data
    */
-  public function __construct(LoggerInterface $log, BoardFactoryInterface $factory, array $data) {
+  public function __construct(LoggerInterface $log, BoardFactoryInterface $factory, array $data): void {
 
     $this->factory = $factory;
     $this->log = $log;
@@ -69,7 +69,7 @@ class Game {
    *
    * @throws GameConfigException
    */
-  protected function boot() {
+  protected function boot(): void {
 
     $this->pawns = new SplObjectStorage();
 
@@ -97,7 +97,7 @@ class Game {
   /**
    * Run game initialization.
    */
-  public function init() {
+  public function init(): void {
 
     foreach ($this->items as $item) {
 
@@ -121,7 +121,7 @@ class Game {
   /**
    * Run game.
    */
-  public function play() {
+  public function play(): void {
 
     $this->log->info('Start game iterations.');
     $this->loop();
@@ -131,7 +131,7 @@ class Game {
   /**
    * Get current data as text.
    */
-  public function getDataAsText() {
+  public function getDataAsText(): string {
 
     $output = implode(' - ', $this->board->export()) . PHP_EOL;
     foreach ($this->items as $item)  {
@@ -148,7 +148,7 @@ class Game {
    *
    * Game will iterate until all pawns related actions have been resolved.
    */
-  protected function loop() {
+  protected function loop(): void {
 
     do {
       $activePlayer = 0;
@@ -176,7 +176,7 @@ class Game {
    * @param PawnInterface $pawn
    * @param BoardCellInterface $cell
    */
-  protected function pickUp(PawnInterface $pawn, BoardCellInterface $cell) {
+  protected function pickUp(PawnInterface $pawn, BoardCellInterface $cell): void {
 
     $cellItems = $cell->getItems();
     foreach ($cellItems as $cellItem) {
@@ -196,7 +196,7 @@ class Game {
    * @param PawnInterface $pawn
    * @param string $action
    */
-  protected function processAction(PawnInterface $pawn, $action) {
+  protected function processAction(PawnInterface $pawn, string $action): void {
 
     switch ($action) {
 
@@ -235,7 +235,7 @@ class Game {
    *
    * @return BoardCellInterface | null
    */
-  protected function triggerItemMove(MovableItem $item) {
+  protected function triggerItemMove(MovableItem $item): BoardCellInterface {
 
     $posX = $item->getX();
     $posY = $item->getY();
@@ -262,7 +262,7 @@ class Game {
     }
 
     if (!$this->board->isCellAccessible($targetX, $targetY)) {
-      $this->log->warning('Cell (' . $targetX . ', ' . $targetY . ') is unreachable, movement skipped.');
+      $this->log->warning('Cell (' . $targetX . ', ' . $targetY . ') is already occupied, movement skipped.');
       return;
     }
 

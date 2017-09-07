@@ -2,18 +2,20 @@
 
 namespace TGodin\CarbonIT\Board\BoardItem\MovableItem;
 
+use TGodin\CarbonIT\Board\BoardItem\BoardItemInterface;
+
 /**
  *
  * @author tanguy
  */
-interface MovableItemInterface {
+interface MovableItemInterface extends BoardItemInterface {
 
   /**
    * Get item current orientation.
    *
    * @return string
    */
-  public function getOrientation();
+  public function getOrientation(): string;
 
   /**
    * Set item orientation.
@@ -24,11 +26,21 @@ interface MovableItemInterface {
    *
    * @throws GameConfigException
    */
-  public function setOrientation($orientation);
+  public function setOrientation(string $orientation): string;
 
-  public function rotateLeft();
+  /**
+   * Rotate item toward left.
+   *
+   * @return $this
+   */
+  public function rotateLeft(): self;
 
-  public function rotateRight();
+  /**
+   * Rotate item toward right.
+   *
+   * @return $this
+   */
+  public function rotateRight(): self;
 
   /**
    * Change item position.
@@ -38,6 +50,6 @@ interface MovableItemInterface {
    *
    * @return $this
    */
-  public function setMove($x, $y);
+  public function setMove(int $x, int $y): self;
 
 }

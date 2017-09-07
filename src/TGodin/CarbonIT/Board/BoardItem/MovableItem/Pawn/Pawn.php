@@ -16,17 +16,17 @@ class Pawn extends MovableItem implements PawnInterface {
 
   protected $name;
 
-  public function __construct($posX, $posY, $orientation, $name) {
+  public function __construct(int $posX, int $posY, string $orientation, string $name): void {
 
     parent::__construct($posX, $posY, $orientation);
-    $this->name = (string) $name;
+    $this->name = $name;
   }
 
-  public function getName() {
+  public function getName(): string {
     return $this->name;
   }
 
-  public function export() {
+  public function export(): array {
 
     return ['type' => 'A', 'name' => $this->name, 'X' => $this->posX, 'Y' => $this->posY, 'pickables' => $this->pickables];
   }

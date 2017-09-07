@@ -7,15 +7,14 @@ namespace TGodin\CarbonIT\Board\BoardItem;
  *
  * @author godinta
  */
-interface BoardItemPickableInterface {
-
+interface BoardItemPickableInterface extends BoardItemInterface {
 
   /**
    * Check if pickables are available.
    *
    * @return boolean
    */
-  public function hasAvailablePickables();
+  public function hasAvailablePickables(): bool;
 
   /**
    * Decrement pickables.
@@ -23,11 +22,11 @@ interface BoardItemPickableInterface {
    * @return boolean
    *   True if pickable has been successfully decreased, else false.
    */
-  public function decrementPickables();
+  public function decrementPickables(): bool;
 
   /**
    * Add a pickable to inventory.
    */
-  public function incrementPickables();
+  public function incrementPickables(): void;
 
 }

@@ -2,6 +2,7 @@
 
 namespace TGodin\CarbonIT\Board;
 
+use Traversable;
 use TGodin\CarbonIT\Board\BoardItem\BoardItem;
 
 /**
@@ -10,12 +11,12 @@ use TGodin\CarbonIT\Board\BoardItem\BoardItem;
  */
 interface BoardCellInterface {
 
-  public function addItem(BoardItem $item);
+  public function addItem(BoardItem $item): bool;
 
-  public function isAccessible();
+  public function isAccessible(): bool;
 
-  public function getItems();
+  public function getItems(): Traversable;
 
-  public function removeItem(BoardItem $item);
+  public function removeItem(BoardItem $item): BoardCellInterface;
 
 }

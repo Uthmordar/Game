@@ -16,7 +16,7 @@ trait BoardItemPickableTrait {
    *
    * @return boolean
    */
-  public function hasAvailablePickables() {
+  public function hasAvailablePickables(): bool {
 
     return $this->pickables > 0;
   }
@@ -27,7 +27,7 @@ trait BoardItemPickableTrait {
    * @return boolean
    *   True if pickable has been successfully decreased, else false.
    */
-  public function decrementPickables() {
+  public function decrementPickables(): bool {
 
     if ($this->hasAvailablePickables()) {
       $this->pickables--;
@@ -39,7 +39,7 @@ trait BoardItemPickableTrait {
   /**
    * Add a pickable to inventory.
    */
-  public function incrementPickables() {
+  public function incrementPickables(): void {
 
     $this->pickables++;
   }

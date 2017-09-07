@@ -2,7 +2,6 @@
 
 namespace TGodin\CarbonIT\Board;
 
-use TGodin\CarbonIT\ExportableInterface;
 use TGodin\CarbonIT\Exception\GameConfigException;
 use TGodin\CarbonIT\Board\BoardItem\BoardItem;
 
@@ -11,7 +10,7 @@ use TGodin\CarbonIT\Board\BoardItem\BoardItem;
  *
  * @author tanguy
  */
-class Board implements BoardInterface, ExportableInterface {
+class Board implements BoardInterface {
 
   // Board width.
   protected $x = 0;
@@ -32,14 +31,14 @@ class Board implements BoardInterface, ExportableInterface {
    *
    * @throws GameConfigException
    */
-  public function __construct($x, $y) {
+  public function __construct(int $x, int $y): void {
 
     if (!is_numeric($x) || !is_numeric($y) || $x < 1 || $y < 1) {
       throw new GameConfigException("Board width and height should be numeric and heighter than 0.");
     }
 
-    $this->x = (int) $x;
-    $this->y = (int) $y;
+    $this->x = $x;
+    $this->y = $y;
     for ($i = 0; $i < $y; $i++) {
       $row = new BoardRow($x);
       array_push($this->rows, $row);
@@ -54,7 +53,7 @@ class Board implements BoardInterface, ExportableInterface {
    *
    * @return BoardCellInterface | null
    */
-  public function getCell($posX, $posY) {
+  public function getCell(int $posX, int $posY): BoardCellInterface {
 
     return !empty($this->rows[$posY]) ?  $this->rows[$posY]->get($posX) : null;
   }
@@ -62,14 +61,14 @@ class Board implements BoardInterface, ExportableInterface {
   /**
    * @return int
    */
-  public function getHeight() {
+  public function getHeight(): int {
     return $this->y;
   }
 
   /**
    * @return int
    */
-  public function getWidth() {
+  public function getWidth(): int {
     return $this->x;
   }
 
@@ -79,7 +78,7 @@ class Board implements BoardInterface, ExportableInterface {
    * @param int $posX
    * @param int $posY
    */
-  public function isCellAccessible($posX, $posY) {
+  public function isCellAccessible(int $posX, int $posY): bool {
 
     if (!is_numeric($posX) || !is_numeric($posY) || $posX < 0 || $posY < 0 || $posX > $this->x - 1 || $posY > $this->y - 1) {
       return false;
@@ -98,7 +97,7 @@ class Board implements BoardInterface, ExportableInterface {
    *
    * @throws GameConfigException
    */
-  public function putItem(BoardItem $item, $posX, $posY) {
+  public function putItem(BoardItem $item, int $posX, int $posY): bool {
 
     if (!is_numeric($posX) || !is_numeric($posY) || $posX <0 || $posY < 0 || $posX > $this->x - 1 || $posY > $this->y - 1) {
       throw new GameConfigException("Item pos X and Y should be numeric and in board range.");
@@ -118,15 +117,15 @@ class Board implements BoardInterface, ExportableInterface {
    *
    * @return $this
    */
-  public function removeItem(BoardItem $item, $x, $y) {
+  public function removeItem(BoardItem $item, int $x, int $y): self {
 
     if (!empty($this->rows[$y])) {
-      $this->rows[$y]->delete($item, $x);
+      $this->rows[$y]->delete($x, $item);
     }
     return $this;
   }
 
-  public function export() {
+  public function export(): array {
 
     return ['type' => 'C', 'X' => $this->x, 'Y' => $this->y];
   }

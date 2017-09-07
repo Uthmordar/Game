@@ -9,16 +9,16 @@ use TGodin\CarbonIT\ExportableInterface;
  *
  * @author tanguy
  */
-abstract class BoardItem implements ExportableInterface {
+abstract class BoardItem implements BoardItemInterface, ExportableInterface {
 
   protected $accessibility = false;
   protected $posX;
   protected $posY;
 
-  public function __construct($posX, $posY) {
+  public function __construct(int $posX, int $posY): void {
 
-    $this->posX = (int) $posX;
-    $this->posY = (int) $posY;
+    $this->posX = $posX;
+    $this->posY = $posY;
   }
 
   /**
@@ -28,7 +28,7 @@ abstract class BoardItem implements ExportableInterface {
    *
    * @return boolean
    */
-  public function getAccessibility() {
+  public function getAccessibility(): bool {
     return $this->accessibility;
   }
 
@@ -37,7 +37,7 @@ abstract class BoardItem implements ExportableInterface {
    *
    * @return int
    */
-  public function getX() {
+  public function getX(): int {
 
     return $this->posX;
   }
@@ -47,7 +47,7 @@ abstract class BoardItem implements ExportableInterface {
    *
    * @return int
    */
-  public function getY() {
+  public function getY(): int {
 
     return $this->posY;
   }
@@ -57,7 +57,7 @@ abstract class BoardItem implements ExportableInterface {
    *
    * @return array
    */
-  public function export() {
+  public function export(): array {
 
     return ['X' => $this->posX, 'Y' => $this->posY];
   }
